@@ -1,3 +1,3 @@
-module github.com/kermeow/rnnoise
+module github.com/kermeow/static-rnnoise
 
 go 1.26.2

@@ -1,7 +1,6 @@
 package rnnoise
 
 /*
-#cgo pkg-config: rnnoise
 #include <rnnoise.h>
 */
 import "C"
