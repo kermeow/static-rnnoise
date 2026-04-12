@@ -46,3 +46,6 @@ genfiles() {
 
 genfiles "" src/*.c
 # genfiles "amd64.v3" src/x86/*.c
+
+rm ../inc-src-dump-features.go
+rm ../inc-src-write-weights.go
