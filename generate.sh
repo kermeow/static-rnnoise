@@ -45,4 +45,4 @@ genfiles() {
 }
 
 genfiles "" src/*.c
-genfiles "x86 || amd64" src/x86/*.c
+# genfiles "amd64.v3" src/x86/*.c
