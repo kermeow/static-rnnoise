@@ -45,17 +45,17 @@ func (d *DenoiseState) Init() error {
 
 // Decodes a frame of samples
 // in and out must be at least rnnoise.GetFrameSize() large
-func (d *DenoiseState) ProcessFrame(out []float32, in []float32) error {
+func (d *DenoiseState) ProcessFrame(out []float32, in []float32) (float32, error) {
 	if d.p == nil {
-		return ErrNotInitialized
+		return 0, ErrNotInitialized
 	}
 	fs := GetFrameSize()
 	if len(out) < fs || len(in) < fs {
-		return ErrBufTooSmall
+		return 0, ErrBufTooSmall
 	}
 
 	outp := (*C.float)(unsafe.Pointer(&out[0]))
 	inp := (*C.float)(unsafe.Pointer(&in[0]))
-	C.rnnoise_process_frame(d.p, outp, inp)
-	return nil
+	vad := C.rnnoise_process_frame(d.p, outp, inp)
+	return float32(vad), nil
 }
