@@ -38,7 +38,7 @@ func (d *DenoiseState) Init() error {
 	}
 	size := C.rnnoise_get_size()
 	d.mem = make([]byte, size)
-	d.p = (*C.DenoiseState)(unsafe.Pointer(&d.mem))
+	d.p = (*C.DenoiseState)(unsafe.Pointer(&d.mem[0]))
 	C.rnnoise_init(d.p, nil)
 	return nil
 }
@@ -54,8 +54,8 @@ func (d *DenoiseState) ProcessFrame(out []float32, in []float32) error {
 		return ErrBufTooSmall
 	}
 
-	outp := (*C.float)(unsafe.Pointer(&out))
-	inp := (*C.float)(unsafe.Pointer(&in))
+	outp := (*C.float)(unsafe.Pointer(&out[0]))
+	inp := (*C.float)(unsafe.Pointer(&in[0]))
 	C.rnnoise_process_frame(d.p, outp, inp)
 	return nil
 }
